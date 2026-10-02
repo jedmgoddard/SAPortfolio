@@ -35,7 +35,6 @@
     width: 100%;
     pointer-events: none;
     z-index: 15;
-    transition: transform 0.18s ease-out;
     will-change: transform;
     transform: translateZ(0);
   }
@@ -143,6 +142,39 @@
     to { opacity: 1; transform: translateY(0); }
   }
 
+
+  /* ---------- Project menu (Curating) ---------- */
+  .project-menu {
+    display: flex;
+    flex-direction: column;
+    max-width: 480px;
+    margin: 0 auto 32px;
+    border-top: 1.5px solid var(--ink);
+  }
+  .project-menu button {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 16px;
+    width: 100%;
+    padding: 14px 4px;
+    background: transparent;
+    border: none;
+    border-bottom: 1.5px solid var(--ink);
+    border-radius: 0;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--ink);
+    text-align: left;
+    cursor: pointer;
+    transition: background 0.2s ease, color 0.2s ease, padding 0.2s ease;
+  }
+  .project-menu button:hover { padding-left: 12px; }
+  .project-menu button.active { background: var(--ink); color: var(--paper); padding-left: 12px; }
+  .project-menu .pm-year { font-weight: 400; opacity: 0.6; flex-shrink: 0; }
+  .project-detail { display: none; scroll-margin-top: 24px; }
+  .project-detail.open { display: block; animation: fadeIn 0.3s ease; }
   .panel h2 { font-size: 14px; font-weight: 400; margin: 0 0 24px; text-align: center; opacity: 0.55; }
   .work-item { margin-bottom: 40px; }
   .work-item .work-title { font-size: 18px; margin: 0 0 4px; }
@@ -286,7 +318,15 @@
     <div class="ccc-panels">
       <section class="panel" id="panel-curating">
         <h2>Curating</h2>
-        <div class="work-item">
+        <nav class="project-menu" aria-label="Curated projects">
+          <button type="button" data-project="snakes-ladders">
+            <span class="pm-title">Snakes &amp; Ladders</span><span class="pm-year">2026</span>
+          </button>
+          <button type="button" data-project="placeholder-02">
+            <span class="pm-title">Exhibition title placeholder 02</span><span class="pm-year">Year</span>
+          </button>
+        </nav>
+        <div class="work-item project-detail" id="project-snakes-ladders">
           <p class="work-title">Snakes &amp; Ladders</p>
           <p class="work-meta">MamarLab, Abu Dhabi — 22–31 January 2026</p>
 
@@ -310,7 +350,7 @@
           <p class="credit-line"><span class="label">Curators:</span> Shamsa Alnahyan, Nicolò Venelli</p>
         </div>
 
-        <div class="work-item">
+        <div class="work-item project-detail" id="project-placeholder-02">
           <p class="work-title">Exhibition title placeholder 02</p>
           <p class="work-meta">Venue, City — Month Year</p>
           <div class="work-media">exhibition photo / video</div>
@@ -375,8 +415,12 @@
   function makeBar(opts) {
     const el = document.createElement('div');
     el.className = 'bar';
-    el.style.width = opts.w + 'px';
-    el.style.height = opts.h + 'px';
+    // Sized to match the client mockup: ~29% of screen width long,
+    // ~8% thick (≈3.6:1). f is a small per-piece variance so pieces
+    // look like one batch of confetti, not identical stamps.
+    const f = opts.f;
+    el.style.width = `clamp(${(130*f).toFixed(1)}px, ${(29*f).toFixed(2)}vw, ${(270*f).toFixed(1)}px)`;
+    el.style.height = `clamp(${(36*f).toFixed(1)}px, ${(8*f).toFixed(2)}vw, ${(74*f).toFixed(1)}px)`;
     el.style.background = opts.color;
     el.style.transform = `rotate(${opts.rot}deg)`;
     if (opts.opacity !== undefined) el.style.opacity = opts.opacity;
@@ -388,12 +432,10 @@
     const container = document.getElementById(id);
     const rand = makeRand(seed);
     for (let i = 0; i < count; i++) {
-      const size = 38 + rand() * 10;
-      const w = size;
-      const h = size * (0.82 + rand() * 0.28);
+      const f = 0.94 + rand() * 0.12;
       const el = makeBar({
-        w, h,
-        rot: -35 + rand() * 70,
+        f,
+        rot: -70 + rand() * 140,
         color: basePalette[Math.floor(rand() * basePalette.length)],
         opacity: 0.85
       });
@@ -404,26 +446,23 @@
     }
   }
 
-  fillConfettiBlock('confetti-block-1', 11, 12);
-  fillConfettiBlock('confetti-block-2', 47, 12);
-  fillConfettiBlock('confetti-block-3', 233, 12);
+  fillConfettiBlock('confetti-block-1', 11, 4);
+  fillConfettiBlock('confetti-block-2', 47, 4);
+  fillConfettiBlock('confetti-block-3', 233, 4);
 
   // ---------- About block: a few small pieces framing the text, base layer ----------
   function fillAboutFrame() {
     const container = document.getElementById('about-frame');
     const rand = makeRand(91);
     const positions = [
-      { top: '4%', left: '6%' }, { top: '6%', left: '86%' },
-      { top: '46%', left: '3%' }, { top: '50%', left: '92%' },
-      { top: '90%', left: '10%' }, { top: '88%', left: '80%' }
+      { top: '2%', left: '-8%' }, { top: '4%', left: '78%' },
+      { top: '82%', left: '-6%' }, { top: '84%', left: '76%' }
     ];
     positions.forEach(pos => {
-      const size = 26 + rand() * 8;
-      const w = size;
-      const h = size * (0.82 + rand() * 0.28);
+      const f = 0.94 + rand() * 0.12;
       const el = makeBar({
-        w, h,
-        rot: -30 + rand() * 60,
+        f,
+        rot: -70 + rand() * 140,
         color: basePalette[Math.floor(rand() * basePalette.length)],
         opacity: 0.75
       });
@@ -458,16 +497,14 @@
     }
 
     const rand = makeRand(777);
-    const count = Math.min(90, Math.max(24, Math.round(totalHeight / 34)));
+    const count = Math.min(28, Math.max(8, Math.round(totalHeight / 300)));
 
     for (let i = 0; i < count; i++) {
       const y = rand() * totalHeight;
-      const size = 36 + rand() * 10;
-      const w = size;
-      const h = size * (0.82 + rand() * 0.28);
+      const f = 0.94 + rand() * 0.12;
       const el = makeBar({
-        w, h,
-        rot: -35 + rand() * 70,
+        f,
+        rot: -70 + rand() * 140,
         color: overlayPalette[Math.floor(rand() * overlayPalette.length)],
         opacity: opacityForY(y)
       });
@@ -484,22 +521,40 @@
     resizeTimer = setTimeout(buildOverlay, 250);
   });
 
-  // continuous gentle drift the entire way down the page
-  // (straightforward vertical motion only — client explicitly preferred
-  // this over the rotating/swaying version)
-  let ticking = false;
-  function updateDrift() {
-    const overlay = document.getElementById('overlay-confetti');
-    const y = window.scrollY;
-    overlay.style.transform = `translate3d(0, ${y * 0.12}px, 0)`;
-    ticking = false;
-  }
-  window.addEventListener('scroll', () => {
-    if (!ticking) {
-      requestAnimationFrame(updateDrift);
-      ticking = true;
+  // Smoothed vertical drift (up-and-down only, per client feedback).
+  // Instead of snapping to scroll position, the overlay eases a fraction
+  // of the remaining distance each frame (lerp), which gives a fluid glide
+  // without CSS transitions restarting on every scroll event. The loop
+  // stops itself once settled, so there's zero cost while idle.
+  const overlayEl = document.getElementById('overlay-confetti');
+  const DRIFT_RATE = 0.12;   // how far the overlay travels relative to scroll
+  const EASE = 0.09;         // lower = silkier/laggier, higher = tighter
+  let currentY = window.scrollY * DRIFT_RATE;
+  let rafId = null;
+
+  function driftLoop() {
+    const targetY = window.scrollY * DRIFT_RATE;
+    currentY += (targetY - currentY) * EASE;
+    overlayEl.style.transform = `translate3d(0, ${currentY.toFixed(2)}px, 0)`;
+    if (Math.abs(targetY - currentY) > 0.05) {
+      rafId = requestAnimationFrame(driftLoop);
+    } else {
+      currentY = targetY;
+      overlayEl.style.transform = `translate3d(0, ${currentY.toFixed(2)}px, 0)`;
+      rafId = null;
     }
+  }
+
+  window.addEventListener('scroll', () => {
+    if (rafId === null) rafId = requestAnimationFrame(driftLoop);
   }, { passive: true });
+
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    // respect reduced motion: no glide, just follow scroll directly
+    window.addEventListener('scroll', () => {
+      overlayEl.style.transform = `translate3d(0, ${window.scrollY * DRIFT_RATE}px, 0)`;
+    }, { passive: true });
+  }
 
   // ---------- Language toggle (About Me only) ----------
   const langButtons = document.querySelectorAll('.lang-toggle button');
@@ -539,6 +594,25 @@
         document.getElementById(`panel-${btn.dataset.tab}`).classList.add('active');
       }
       setTimeout(buildOverlay, 0); // panel content changes page height, so re-measure zones
+    });
+  });
+
+  // ---------- Curating project menu: pick a project, its details open ----------
+  const projectButtons = document.querySelectorAll('.project-menu button');
+  const projectDetails = document.querySelectorAll('.project-detail');
+
+  projectButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const wasOpen = btn.classList.contains('active');
+      projectButtons.forEach(b => b.classList.remove('active'));
+      projectDetails.forEach(d => d.classList.remove('open'));
+      if (!wasOpen) {
+        btn.classList.add('active');
+        const detail = document.getElementById(`project-${btn.dataset.project}`);
+        detail.classList.add('open');
+        detail.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+      setTimeout(buildOverlay, 0); // page height changed, re-measure text/confetti zones
     });
   });
 
