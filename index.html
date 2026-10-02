@@ -23,8 +23,25 @@
     color: var(--ink);
     font-family: 'Andale Mono', 'Courier New', monospace;
     font-weight: 700;
-    overflow-x: hidden;
-    position: relative;
+  }
+  html {
+    overflow-x: hidden;   /* fallback for older browsers */
+    overflow-x: clip;     /* clips sideways spill without making a scroll box */
+  }
+  body {
+    position: relative;   /* anchors the confetti clip box to the full page */
+    min-height: 100%;
+  }
+
+  /* Holds the overlay so its overhang (pieces past the bottom, the
+     downward drift) is cut off instead of extending the page. */
+  #overlay-clip {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    overflow: clip;
+    pointer-events: none;
+    z-index: 15;
   }
 
   /* ---------- Overlay confetti: one continuous column spanning the full page ---------- */
@@ -34,7 +51,6 @@
     left: 0;
     width: 100%;
     pointer-events: none;
-    z-index: 15;
     will-change: transform;
     transform: translateZ(0);
   }
@@ -276,7 +292,7 @@
 </head>
 <body>
 
-<div id="overlay-confetti" aria-hidden="true"></div>
+<div id="overlay-clip" aria-hidden="true"><div id="overlay-confetti"></div></div>
 
 <main class="base-layer">
 
