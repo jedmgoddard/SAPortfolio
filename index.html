@@ -95,7 +95,7 @@
   }
 
   /* ---------- About ---------- */
-  .block-about { min-height: 60vh; }
+  .block-about { min-height: 60vh; padding-top: 12vh; padding-bottom: 12vh; }
 
   .about-inner { position: relative; max-width: 560px; width: 100%; text-align: center; z-index: 2; }
 
@@ -122,13 +122,15 @@
 
   .lang-toggle button.active { background: var(--ink); color: var(--paper); }
 
-  .about { font-size: 15px; line-height: 1.7; font-weight: 400; }
+  .about { font-size: 15px; line-height: 1.7; font-weight: 400; text-align: left; }
+  .about p { margin: 0 0 1.1em; }
+  .about p:last-child { margin-bottom: 0; }
   .about[dir="rtl"] { text-align: right; }
 
   /* small static pieces framing the about text, per sketch (base layer, not overlay) */
   .about-frame .bar { opacity: 0.7; }
 
-  /* ---------- Curating / Consulting / Caring ---------- */
+  /* ---------- Curating / Consultancy / Caring ---------- */
   .block-ccc { min-height: 55vh; }
 
   .ccc-buttons { display: flex; gap: 14px; flex-wrap: wrap; justify-content: center; margin-bottom: 8px; position: relative; z-index: 2; }
@@ -215,6 +217,13 @@
     .pm-thumb { width: 56px; height: 56px; }
     .pm-venue { display: none; }
   }
+  .project-menu button.pm-soon { cursor: default; opacity: 0.45; }
+  .project-menu button.pm-soon:hover { background: transparent; }
+  .project-menu.pm-text button { grid-template-columns: 1fr auto; align-items: center; padding: 16px 8px; }
+  .project-menu.pm-text .pm-title { font-size: 15px; }
+  .pm-arrow { font-size: 18px; line-height: 1; transition: transform 0.2s ease; }
+  .project-menu button.active .pm-arrow { transform: rotate(45deg); }
+  .caring-bio { font-size: 15px; line-height: 1.7; text-align: left; max-width: 640px; margin: 0 auto 28px; opacity: 0.55; }
   .project-detail { display: none; scroll-margin-top: 24px; }
   .project-detail.open { display: block; animation: fadeIn 0.3s ease; }
   .panel h2 { font-size: 14px; font-weight: 400; margin: 0 0 24px; text-align: center; opacity: 0.55; }
@@ -340,8 +349,8 @@
         <button type="button" data-lang="ar">عربي</button>
       </div>
       <div class="about" id="about-text" dir="ltr">
-        <p id="about-en">Blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah.</p>
-        <p id="about-ar" style="display:none;">بلاه بلاه بلاه بلاه بلاه بلاه بلاه بلاه بلاه بلاه بلاه بلاه بلاه بلاه بلاه بلاه بلاه بلاه بلاه بلاه بلاه.</p>
+        <div id="about-en"><p>Shamsa Alnahyan (b. 2004, Dubai) is a curator and art consultant based in Dubai. Her practice sits at the intersection of curiosity, human emotion, and an anthropological attention to the traces, rituals, and behaviours of everyday life.</p><p>Alnahyan questions translation: how an idea becomes form, how material carries and transforms meaning, and how histories, both personal and collective, can be reinterpreted through an artistic lens. She is interested in how individuals become vessels for ideas, geographies, beliefs, and inherited narratives, and how these are reshaped through lived experience.</p><p>Her work considers the forces shaping the contemporary art landscape, particularly within the UAE, where she was raised. Growing up in an international city has informed her interest in how nationality, time, and cultural exchange shape the experience of belonging within a cosmopolitan society.</p><p>Working closely with artists, Alnahyan engages with the processes that shape the art world around her, including the act of making itself. Moving between the positions of an insider and an observer, she remains attentive to the relationships between artistic practice, cultural context, and the creative economy, exploring how these intersect to produce meaningful expressions that resonate with diverse audiences.</p></div>
+        <div id="about-ar" lang="ar" style="display:none;"><p>شمسة آل نهيان (مواليد 2004، دبي) قيّمة فنية ومستشارة فنية مقيمة في دبي. تقع ممارستها عند تقاطع الفضول والعاطفة الإنسانية والاهتمام الأنثروبولوجي بآثار الحياة اليومية وطقوسها وسلوكياتها.</p><p>تتساءل آل نهيان عن الترجمة: كيف تتحوّل الفكرة إلى شكل، وكيف تحمل المادة المعنى وتحوّله، وكيف يمكن إعادة قراءة التواريخ، الشخصية منها والجماعية، من خلال منظور فني. وتهتم بالكيفية التي يصبح بها الأفراد أوعيةً للأفكار والجغرافيات والمعتقدات والسرديات الموروثة، وكيف يُعاد تشكيلها عبر التجربة المعاشة.</p><p>يتأمل عملها القوى التي تشكّل المشهد الفني المعاصر، ولا سيما في دولة الإمارات العربية المتحدة حيث نشأت. وقد أسهمت نشأتها في مدينة عالمية في تشكيل اهتمامها بالكيفية التي تصوغ بها الجنسية والزمن والتبادل الثقافي تجربةَ الانتماء داخل مجتمع متعدد الثقافات.</p><p>من خلال عملها الوثيق مع الفنانين، تنخرط آل نهيان في العمليات التي تشكّل العالم الفني من حولها، بما في ذلك فعل الصنع ذاته. وبتنقّلها بين موقعَي المطّلعة من الداخل والمراقِبة من الخارج، تبقى منتبهةً للعلاقات بين الممارسة الفنية والسياق الثقافي والاقتصاد الإبداعي، مستكشفةً كيف تتقاطع هذه العناصر لتنتج تعبيرات ذات معنى تلامس جماهير متنوعة.</p></div>
       </div>
     </div>
   </section>
@@ -349,11 +358,11 @@
   <!-- CONFETTI 2 -->
   <section class="block block-confetti" data-zone="confetti" id="confetti-block-2"></section>
 
-  <!-- CURATING / CONSULTING / CARING -->
+  <!-- CURATING / CONSULTANCY / CARING -->
   <section class="block block-ccc" data-zone="text">
     <nav class="ccc-buttons">
       <button type="button" data-tab="curating">Curating</button>
-      <button type="button" data-tab="consulting">Consulting</button>
+      <button type="button" data-tab="consultancy">Consultancy</button>
       <button type="button" data-tab="caring">Caring</button>
     </nav>
 
@@ -367,11 +376,17 @@
             <span><span class="pm-title">Snakes &amp; Ladders</span><span class="pm-tag">Exhibition</span></span>
             <span class="pm-venue">MamarLab, Abu Dhabi</span>
           </button>
-          <button type="button" data-project="placeholder-02">
+          <button type="button" data-project="hudood">
             <span class="pm-thumb pm-thumb-empty" aria-hidden="true"></span>
-            <span class="pm-date">00.00<span>00</span></span>
-            <span><span class="pm-title">Exhibition title placeholder 02</span><span class="pm-tag">Exhibition</span></span>
-            <span class="pm-venue">Venue, City</span>
+            <span class="pm-date">TBC<span>&nbsp;</span></span>
+            <span><span class="pm-title">Hudood</span><span class="pm-tag">Exhibition</span></span>
+            <span class="pm-venue">Venue TBC</span>
+          </button>
+          <button type="button" class="pm-soon" disabled>
+            <span class="pm-thumb pm-thumb-empty" aria-hidden="true"></span>
+            <span class="pm-date">&mdash;<span>&nbsp;</span></span>
+            <span><span class="pm-title">Ceramics</span><span class="pm-tag">Coming soon</span></span>
+            <span class="pm-venue"></span>
           </button>
         </nav>
         <div class="work-item project-detail" id="project-snakes-ladders">
@@ -398,25 +413,37 @@
           <p class="credit-line"><span class="label">Curators:</span> Shamsa Alnahyan, Nicolò Venelli</p>
         </div>
 
-        <div class="work-item project-detail" id="project-placeholder-02">
-          <p class="work-title">Exhibition title placeholder 02</p>
-          <p class="work-meta">Venue, City — Month Year</p>
-          <div class="work-media">exhibition photo / video</div>
-          <p>Blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah.</p>
+        <div class="work-item project-detail" id="project-hudood">
+          <p class="work-title">Hudood</p>
+          <p class="work-meta">Venue, City — Dates TBC</p>
+          <div class="work-media">exhibition photos to follow</div>
+          <p class="empty-state">Exhibition text and images coming soon.</p>
         </div>
       </section>
 
-      <section class="panel" id="panel-consulting">
-        <h2>Consulting</h2>
+      <section class="panel" id="panel-consultancy">
+        <h2>Consultancy</h2>
         <p class="empty-state">Nothing here yet — check back soon.</p>
       </section>
 
       <section class="panel" id="panel-caring">
         <h2>Caring</h2>
-        <div class="work-item">
-          <p class="work-title">Publication / writing title placeholder</p>
-          <p class="work-meta">Month Year</p>
-          <p>Blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah.</p>
+        <p class="caring-bio">Caring statement coming soon.</p>
+        <nav class="project-menu pm-text" aria-label="Caring">
+          <button type="button" data-project="education">
+            <span class="pm-title">Education</span>
+            <span class="pm-arrow" aria-hidden="true">+</span>
+          </button>
+          <button type="button" data-project="publications">
+            <span class="pm-title">Publications</span>
+            <span class="pm-arrow" aria-hidden="true">+</span>
+          </button>
+        </nav>
+        <div class="work-item project-detail" id="project-education">
+          <p class="empty-state">Education coming soon.</p>
+        </div>
+        <div class="work-item project-detail" id="project-publications">
+          <p class="empty-state">Writing and publications coming soon.</p>
         </div>
       </section>
     </div>
@@ -628,7 +655,7 @@
     });
   });
 
-  // ---------- Curating / Consulting / Caring ----------
+  // ---------- Curating / Consultancy / Caring ----------
   const tabButtons = document.querySelectorAll('.ccc-buttons button');
   const panels = document.querySelectorAll('.panel');
 
@@ -646,21 +673,23 @@
   });
 
   // ---------- Curating project menu: pick a project, its details open ----------
-  const projectButtons = document.querySelectorAll('.project-menu button');
-  const projectDetails = document.querySelectorAll('.project-detail');
-
-  projectButtons.forEach(btn => {
-    btn.addEventListener('click', () => {
-      const wasOpen = btn.classList.contains('active');
-      projectButtons.forEach(b => b.classList.remove('active'));
-      projectDetails.forEach(d => d.classList.remove('open'));
-      if (!wasOpen) {
-        btn.classList.add('active');
-        const detail = document.getElementById(`project-${btn.dataset.project}`);
-        detail.classList.add('open');
-        detail.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }
-      setTimeout(buildOverlay, 0); // page height changed, re-measure text/confetti zones
+  document.querySelectorAll('.project-menu').forEach(menu => {
+    const panel = menu.closest('.panel');
+    const buttons = menu.querySelectorAll('button:not([disabled])');
+    const details = panel.querySelectorAll('.project-detail');
+    buttons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const wasOpen = btn.classList.contains('active');
+        buttons.forEach(b => b.classList.remove('active'));
+        details.forEach(d => d.classList.remove('open'));
+        if (!wasOpen) {
+          btn.classList.add('active');
+          const detail = document.getElementById(`project-${btn.dataset.project}`);
+          detail.classList.add('open');
+          detail.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+        setTimeout(buildOverlay, 0); // page height changed, re-measure text/confetti zones
+      });
     });
   });
 
