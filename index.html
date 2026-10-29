@@ -85,7 +85,7 @@
   /* ---------- Hero ---------- */
   .block-hero { min-height: 65vh; text-align: center; }
 
-  .logo-mark { width: 56px; height: 56px; object-fit: contain; margin-bottom: 18px; }
+  .logo-mark { width: 56px; height: 56px; object-fit: contain; margin-bottom: 18px; position: relative; z-index: 1; mix-blend-mode: multiply; }
 
   .name-wrap { position: relative; display: inline-block; }
   #name-frame .bar { z-index: 0; }
@@ -583,15 +583,15 @@
   }
   fillAboutFrame();
 
-  // ---------- Hero: two fixed pieces resting around her name (base layer, never move) ----------
+  // ---------- Hero: one fixed blue piece just above her name (base layer, never move) ----------
   function fillNameFrame() {
     const container = document.getElementById('name-frame');
     const pieces = [
-      { top: '-120%', left: '-50%', rot: -14, color: basePalette[0], f: 0.98 },
-      { top: '105%', left: '55%', rot: 12, color: basePalette[2], f: 1.02 }
+      { top: '-140%', left: '6%', rot: -6, color: '#5a8de0', f: 1.0 }
     ];
     pieces.forEach(pc => {
-      const el = makeBar({ f: pc.f, rot: pc.rot, color: pc.color, opacity: 0.8 });
+      const el = makeBar({ f: pc.f, rot: pc.rot, color: pc.color, opacity: 0.45 });
+      el.style.translate = '-50% 0';
       el.style.position = 'absolute';
       el.style.top = pc.top;
       el.style.left = pc.left;
